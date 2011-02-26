@@ -1,0 +1,28 @@
+http://cursuri.cs.pub.ro/~pc/lab/index.php/Pagina_principal%C4%83
+
+cat fisier | wc -l
+
+| redirectează outputul lui cat către inputul lui wc
+
+
+Pipe-uri
+* anonime: pipe (unistd.h)
+int fd[2];
+pipe(int *fd);
+- proces 1: fd[0], scriem, 2: fd[1], citim
+- proces 1: fd[1], citim, 2: fd[1], scriem
+* named pipe, mkfifo
+poate fi deschis ca un fișier normal
+open(p, WR_ONLY)
+
+* simulăm comunicația
+- sender
+- receiver
++ sender: structură de tip mesaj
+sender->receiver: out (write only)
+receiver->sender: in
+
+* ABP - alternating bit protocol
+- numere de secvență 0/1
+- fiecare mesaj: număr secvență (0/1), lungime (int), conținut (char*)
+
