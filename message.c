@@ -35,15 +35,15 @@ int read_message(int fd, message **m) {
   return total_read;
 }
 
-int write_message(int fd, message m) {
+int write_message(int fd, message *m) {
   int total_written = 0, write_ret;
-  write_ret = write(fd, &m.bit, sizeof(char));
+  write_ret = write(fd, &m->bit, sizeof(char));
   total_written += error(write_ret);
 
-  write_ret = write(fd, &m.length, sizeof(int));
+  write_ret = write(fd, &m->length, sizeof(int));
   total_written += error(write_ret);
 
-  write_ret = write(fd, m.contents, m.length * sizeof(char));
+  write_ret = write(fd, m->contents, m->length * sizeof(char));
   total_written += error(write_ret);
   
   return total_written;

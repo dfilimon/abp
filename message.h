@@ -8,7 +8,7 @@ typedef struct {
 } message;
 
 int read_message(int fd, message **m);
-int write_message(int fd, message m);
+int write_message(int fd, message *m);
 message* new_message(char *str, char bit);
 
 #endif

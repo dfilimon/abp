@@ -26,7 +26,7 @@ int main(int argc, const char **argv) {
     m = new_message(text, sent);
     int j = 0;
     do {
-      write_message(out, *m);
+      write_message(out, m);
       printf("sending: %d\n", i);
 
       int t = 0;

@@ -26,7 +26,7 @@ int main(int argc, const char **argv) {
     if (rand() % 5 == 0)
       continue;
 
-    write_message(out2, *m);
+    write_message(out2, m);
     printf("forwarded %d\n", m->bit);
 
   }
