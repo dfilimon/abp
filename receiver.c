@@ -16,19 +16,22 @@ int main(int argc, const char **argv) {
   message *m;
   int i, n;
   read(out, &n, sizeof(int));
-  
-  for (i = 0; i < n; ++ i) {
+  char prevBit = -1;
+  for (i = 0; ; ++ i) {
+
     read_message(out, &m);
-    
-    puts(m->contents);
+    if (prevBit == -1 || prevBit != m->bit) {
+      puts(m->contents);
+      prevBit = m->bit;
+    }
     write(in, &(m->bit), sizeof(char));
-    
+
     free(m->contents);
     free(m);
   }
 
   close(out);
   close(in);
-  
+
   return 0;
 }

@@ -9,7 +9,10 @@
 
 #include "message.h"
 
+#include <assert.h>
+
 int main(int argc, const char **argv) {
+  assert(argc == 2);
 
   int out = open("out1", O_WRONLY),
     in = open("in", O_RDONLY | O_NONBLOCK);
@@ -29,15 +32,13 @@ int main(int argc, const char **argv) {
       write_message(out, m);
       printf("sending: %d\n", i);
 
-      int t = 0;
-      do {
-        read(in, &received, sizeof(char));
-        if (errno != EAGAIN)
+      int times = 10;
+      for (; times > 0; -- times) {
+        int bytes_read = read(in, &received, sizeof(char));
+        if (errno != EAGAIN || bytes_read > 0)
           break;
         sleep(1);
-        t += 100;
-      } while (t < 1000);
-
+      }
       printf("%d\n", j++);
     } while (sent != received);
     printf("confirmed %d\n", i);
